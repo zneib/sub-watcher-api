@@ -45,23 +45,23 @@ const addTeam = async ({request, response}: { request: any; response: any; }) =>
   }
 }
 
-// const getPlayers = async ({ response }: { response: any }) => {
-//   try {
-//     const allPlayers = await players.find();
-//     if (allPlayers) {
-//       response.status = 200;
-//       response.body = {
-//         success: true,
-//         data: allPlayers
-//       }
-//     }
-//   } catch (err) {
-//     response.body = {
-//       success: false,
-//       msg: err.toString()
-//     };
-//   }
-// };
+const getTeams = async ({ response }: { response: any }) => {
+  try {
+    const getTeams = await teams.find();
+    if (getTeams) {
+      response.status = 200;
+      response.body = {
+        success: true,
+        data: getTeams
+      }
+    }
+  } catch (err) {
+    response.body = {
+      success: false,
+      msg: err.toString()
+    };
+  }
+};
 
 // const getPlayer = async ({ params, response }: { params: { id: string }; response: any }) => {
 //   try {
@@ -83,4 +83,4 @@ const addTeam = async ({request, response}: { request: any; response: any; }) =>
 //   }
 // }
 
-export { addTeam };
+export { addTeam, getTeams };
