@@ -62,7 +62,7 @@ const getPlayers = async ({ response }: { response: any }) => {
     const query = {
       collection: COLLECTION,
       database: DATABASE,
-      dataSource: DATA_SOURCE
+      dataSource: DATA_SOURCE,
     };
     options.body = JSON.stringify(query);
     const dataResponse = await fetch(URI, options);
