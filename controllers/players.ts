@@ -1,6 +1,5 @@
 const data_api_key = Deno.env.get("DATA_API_KEY");
-const app_id = Deno.env.get("APP_ID");
-const BASE_URI = `https://us-east-1.aws.data.mongodb-api.com/app/data-yowii/endpoint/data/v1`;
+const BASE_URI = `https://data.mongodb-api.com/app/data-yowii/endpoint/data/v1`;
 const DATA_SOURCE = "player-tracker-api";
 const DATABASE = "player_db";
 const COLLECTION = "players";
@@ -73,19 +72,19 @@ const getPlayers = async ({ response }: { response: any }) => {
       response.status = 200;
       response.body = {
         success: true,
-        data: allPlayers,
+        data: allPlayers
       };
     } else {
       response.status = 500;
       response.body = {
         success: false,
-        msg: "Internal Server Error",
+        msg: "Internal Server Error"
       };
     }
   } catch (err) {
     response.body = {
       success: false,
-      msg: err.toString(),
+      msg: err.toString()
     };
   }
 };

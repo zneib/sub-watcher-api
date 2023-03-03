@@ -6,4 +6,4 @@ const app = new Application();
 app.use(oakCors());
 app.use(router.routes()); // Implement our router
 app.use(router.allowedMethods()); // Allow router HTTP methods
-app.listen()
+app.listen();
