@@ -63,4 +63,24 @@ const getPlayers = async ({ response }: { response: any }) => {
   }
 };
 
-export { addPlayer, getPlayers };
+const getPlayer = async ({ params, response }: { params: { id: string }; response: any }) => {
+  try {
+    const player = await players.findOne({
+      id: parseInt(params.id),
+    });
+    if (player) {
+      response.status = 200;
+      response.body = {
+        success: true,
+        data: player
+      }
+    }
+  } catch (error) {
+   response.body = {
+    success: false,
+    msg: error.toString()
+   } 
+  }
+}
+
+export { addPlayer, getPlayers, getPlayer };
