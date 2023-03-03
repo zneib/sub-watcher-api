@@ -1,5 +1,5 @@
 const data_api_key = Deno.env.get("DATA_API_KEY");
-const BASE_URI = `https://data.mongodb-api.com/app/data-yowii/endpoint/data/v1`;
+const BASE_URI = `https://data.mongodb-api.com/app/data-yowii/endpoint/data/beta/action`;
 const DATA_SOURCE = "player-tracker-api";
 const DATABASE = "player_db";
 const COLLECTION = "players";
