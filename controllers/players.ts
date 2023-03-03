@@ -57,6 +57,7 @@ const addPlayer = async ({
 }
 
 const getPlayers = async ({ response }: { response: any }) => {
+  console.log(response);
   try {
     const URI = `${BASE_URI}/find`;
     const query = {
@@ -64,13 +65,14 @@ const getPlayers = async ({ response }: { response: any }) => {
       database: DATABASE,
       dataSource: DATA_SOURCE
     };
-    options.body = JSON.stringify(query);
+    const bodyInfo = JSON.stringify(query);
     const dataResponse = await fetch(URI, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "api-key": `${data_api_key}`
-      }
+      },
+      body: bodyInfo
     });
     const allPlayers = await dataResponse.json();
 
