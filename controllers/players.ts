@@ -65,7 +65,13 @@ const getPlayers = async ({ response }: { response: any }) => {
       dataSource: DATA_SOURCE
     };
     options.body = JSON.stringify(query);
-    const dataResponse = await fetch(URI, options);
+    const dataResponse = await fetch(URI, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": `${data_api_key}`
+      }
+    });
     const allPlayers = await dataResponse.json();
 
     if (allPlayers) {
