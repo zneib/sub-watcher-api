@@ -27,7 +27,7 @@ const addGame = async ({request, response}: { request: any; response: any; }) =>
       const game = await body.value;
       const insertedId = await games.insertOne({
         _id: new ObjectId(),
-        data: game
+        game
       });
 
       response.status = 201;
@@ -52,7 +52,7 @@ const getGames = async ({ response }: { response: any }) => {
       response.status = 200;
       response.body = {
         success: true,
-        getGames
+        data: getGames
       }
     }
   } catch (err) {
