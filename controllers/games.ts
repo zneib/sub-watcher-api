@@ -52,7 +52,7 @@ const getGames = async ({ response }: { response: any }) => {
       response.status = 200;
       response.body = {
         success: true,
-        data: getGames
+        getGames
       }
     }
   } catch (err) {
