@@ -27,7 +27,9 @@ const addGame = async ({request, response}: { request: any; response: any; }) =>
       const game = await body.value;
       const insertedId = await games.insertOne({
         _id: new ObjectId(),
-        game
+        name: body.value.name,
+        players: body.value.players,
+        date: body.value.date
       });
 
       response.status = 201;
