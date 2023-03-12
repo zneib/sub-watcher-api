@@ -24,12 +24,12 @@ const addGame = async ({request, response}: { request: any; response: any; }) =>
       }
     } else {
       const body = await request.body();
-      const game = await body.value;
+      const game = await JSON.parse(body.value);
       const insertedId = await games.insertOne({
         _id: new ObjectId(),
-        name: body.value.name,
-        players: body.value.players,
-        date: body.value.date
+        name: game.name,
+        players: game.players,
+        date: game.date
       });
 
       response.status = 201;
