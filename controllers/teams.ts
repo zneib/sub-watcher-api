@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from "https://deno.land/x/atlas_sdk@v1.1.0/mod.ts";
-import cloudinary from "npm:cloudinary@1.35.0";
+// import cloudinary from "npm:cloudinary@1.35.0";
 const data_api_key = Deno.env.get("DATA_API_KEY");
 
 // console.log(cloudinary.config().cloud_name);
