@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId } from "https://deno.land/x/atlas_sdk@v1.1.0/mod.ts";
+import cloudinary from "npm:cloudinary@1.35.0";
 const data_api_key = Deno.env.get("DATA_API_KEY");
 
 if (!data_api_key) throw new Error('API Key not found');
@@ -13,6 +14,26 @@ const client = new MongoClient({
 
 const db = client.database("team_db");
 const teams = db.collection("teams");
+
+const addTeamPicture = async ({request, response}: { request: any; response: any; }) => {
+  try {
+    if (!request.hasBody) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        msg: "No Data"
+      }
+    } else {
+      const body = await request.body();
+      console.log(body);
+    }
+  } catch (error) {
+    response.body = {
+      success: false,
+      msg: error.toString(),
+    }
+  }
+}
 
 const addTeam = async ({request, response}: { request: any; response: any; }) => {
   try {
@@ -83,4 +104,4 @@ const getTeams = async ({ response }: { response: any }) => {
 //   }
 // }
 
-export { addTeam, getTeams };
+export { addTeamPicture, addTeam, getTeams };
