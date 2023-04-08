@@ -2,6 +2,8 @@ import { MongoClient, ObjectId } from "https://deno.land/x/atlas_sdk@v1.1.0/mod.
 import cloudinary from "npm:cloudinary@1.35.0";
 const data_api_key = Deno.env.get("DATA_API_KEY");
 
+// console.log(cloudinary.config().cloud_name);
+
 if (!data_api_key) throw new Error('API Key not found');
 
 const client = new MongoClient({
