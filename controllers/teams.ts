@@ -2,7 +2,11 @@ import { MongoClient, ObjectId } from "https://deno.land/x/atlas_sdk@v1.1.0/mod.
 import cloudinary from "npm:cloudinary";
 const data_api_key = Deno.env.get("DATA_API_KEY");
 
-// console.log(cloudinary.config().cloud_name);
+cloudinary.config({
+  secure: true
+});
+
+console.log(cloudinary.config());
 
 if (!data_api_key) throw new Error('API Key not found');
 
@@ -27,7 +31,13 @@ const addTeamPicture = async ({request, response}: { request: any; response: any
       }
     } else {
       const body = await request.body();
-      console.log(body);
+      const pictureUrl = await body.value;
+
+      response.status = 201;
+      response.body = {
+        success: true,
+        data: pictureUrl,
+      }
     }
   } catch (error) {
     response.body = {
