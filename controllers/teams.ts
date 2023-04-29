@@ -43,39 +43,18 @@ const addTeamPicture = async ({request, response}: { request: any; response: any
 }
 
 const addTeamTest = async ({request, response}: { request: any; response: any; }) => {
-    try {
-      if (!request.hasBody) {
-        response.status = 400;
-        response.body = {
-          success: false,
-          msg: "No Data"
-        }
-      } else {
-        await db.set(["teams", "pinpals"], { 
-          maxPlayers: 4,
-          color: 'green',
-          players: [
-              {name: "Homer Simpson", number: 11, points: 0, assists: 0},
-              {name: "Barney Gumble", number: 45, points: 0, assists: 0},
-              {name: "Otto", number: 33, points: 0, assists: 0},
-              {name: "Apu", number: 75, points: 0, assists: 0}
-          ]
-        });
+  await db.set(["teams", "pinpals"], { 
+    maxPlayers: 4,
+    color: 'green',
+    players: [
+        {name: "Homer Simpson", number: 11, points: 0, assists: 0},
+        {name: "Barney Gumble", number: 45, points: 0, assists: 0},
+        {name: "Otto", number: 33, points: 0, assists: 0},
+        {name: "Apu", number: 75, points: 0, assists: 0}
+    ]
+  });
 
-        const res = await db.get(["teams", "pinpals"]);
-
-        response.status = 201;
-        response.body = {
-          success: true,
-          data: res
-        }
-      }
-    } catch (error) {
-      response.body = {
-        success: false,
-        msg: error.toString(),
-      }
-    }
+  const res = await db.get(["teams", "pinpals"]);
 } 
 
 const addTeam = async ({request, response}: { request: any; response: any; }) => {
