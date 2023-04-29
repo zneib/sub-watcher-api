@@ -1,7 +1,7 @@
 import { MongoClient, ObjectId } from "https://deno.land/x/atlas_sdk@v1.1.0/mod.ts";
 const data_api_key = Deno.env.get("DATA_API_KEY");
 
-const db = await Deno.openKv();
+const kv = await Deno.openKv();
 
 if (!data_api_key) throw new Error('API Key not found');
 
@@ -43,7 +43,7 @@ const addTeamPicture = async ({request, response}: { request: any; response: any
 }
 
 const addTeamTest = async ({request, response}: { request: any; response: any; }) => {
-  await db.set(["teams", "pinpals"], { 
+  await kv.set(["teams", "pinpals"], { 
     maxPlayers: 4,
     color: 'green',
     players: [
@@ -55,6 +55,12 @@ const addTeamTest = async ({request, response}: { request: any; response: any; }
   });
 
   const res = await db.get(["teams", "pinpals"]);
+
+  response.status = 201;
+  response.body = {
+    success: true,
+    data: res,
+  }
 } 
 
 const addTeam = async ({request, response}: { request: any; response: any; }) => {
