@@ -59,7 +59,7 @@ const addTeamTest = async ({request, response}: { request: any; response: any; }
   response.status = 201;
   response.body = {
     success: true,
-    data: res,
+    data: JSON.stringify(res.value),
   }
 } 
 
