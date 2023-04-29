@@ -1,12 +1,7 @@
 import { MongoClient, ObjectId } from "https://deno.land/x/atlas_sdk@v1.1.0/mod.ts";
-import cloudinary from "npm:cloudinary";
 const data_api_key = Deno.env.get("DATA_API_KEY");
 
-cloudinary.config({
-  secure: true
-});
-
-console.log(cloudinary.config());
+const db = await Deno.openKv();
 
 if (!data_api_key) throw new Error('API Key not found');
 
@@ -46,6 +41,42 @@ const addTeamPicture = async ({request, response}: { request: any; response: any
     }
   }
 }
+
+const addTeamTest = async ({request, response}: { request: any; response: any; }) => {
+    try {
+      if (!request.hasBody) {
+        response.status = 400;
+        response.body = {
+          success: false,
+          msg: "No Data"
+        }
+      } else {
+        await db.set(["teams", "pinpals"], { 
+          maxPlayers: 4,
+          color: 'green',
+          players: [
+              {name: "Homer Simpson", number: 11, points: 0, assists: 0},
+              {name: "Barney Gumble", number: 45, points: 0, assists: 0},
+              {name: "Otto", number: 33, points: 0, assists: 0},
+              {name: "Apu", number: 75, points: 0, assists: 0}
+          ]
+        });
+
+        const res = await db.get(["teams", "pinpals"]);
+
+        response.status = 201;
+        response.body = {
+          success: true,
+          data: res
+        }
+      }
+    } catch (error) {
+      response.body = {
+        success: false,
+        msg: error.toString(),
+      }
+    }
+} 
 
 const addTeam = async ({request, response}: { request: any; response: any; }) => {
   try {
@@ -116,4 +147,4 @@ const getTeams = async ({ response }: { response: any }) => {
 //   }
 // }
 
-export { addTeamPicture, addTeam, getTeams };
+export { addTeamPicture, addTeamTest, addTeam, getTeams };
