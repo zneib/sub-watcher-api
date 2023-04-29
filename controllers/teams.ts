@@ -54,7 +54,7 @@ const addTeamTest = async ({request, response}: { request: any; response: any; }
     ]
   });
 
-  const res = await db.get(["teams", "pinpals"]);
+  const res = await kv.get(["teams", "pinpals"]);
 
   response.status = 201;
   response.body = {
