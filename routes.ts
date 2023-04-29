@@ -10,7 +10,7 @@ router
   .post("/api/players", addPlayer) // Add a player
   .post("/api/games", addGame) // Add a new game
   .post("/api/addTeamPicture", addTeamPicture) // Add a team picture
-  .get("/api/addTeamTest", addTeamTest) // Test route for Deno KV
+  .post("/api/addTeamTest", addTeamTest) // Test route for Deno KV
   .get("/api/players", getPlayers) // Get all players
   .get("/api/getPlayer/:id", getPlayer) // Get a single player
   .get("/api/getTeams", getTeams) // Get all teams

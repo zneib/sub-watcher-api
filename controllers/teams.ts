@@ -43,24 +43,37 @@ const addTeamPicture = async ({request, response}: { request: any; response: any
 }
 
 const addTeamTest = async ({request, response}: { request: any; response: any; }) => {
-  await kv.set(["teams", "pinpals"], { 
-    maxPlayers: 4,
-    color: 'green',
-    players: [
-        {name: "Homer Simpson", number: 11, points: 0, assists: 0},
-        {name: "Barney Gumble", number: 45, points: 0, assists: 0},
-        {name: "Otto", number: 33, points: 0, assists: 0},
-        {name: "Apu", number: 75, points: 0, assists: 0}
-    ]
-  });
+  try {
+    if (!request.hasBody) {
+      response.status = 400;
+      response.body = {
+        success: false,
+        msg: "No Data"
+      }
+    } else {
+      const body = await request.body();
+      const team = await body.value;
 
-  const res = await kv.get(["teams", "pinpals"]);
+      await kv.set(["teams", body.value.name], { 
+        name: body.value.name,
+        maxPlayers: body.value.maxPlayers,
+        color: body.value.color,
+        players: [...body.value.players]
+      });
 
-  response.status = 201;
-  response.body = {
-    success: true,
-    data: JSON.stringify(res.value),
+      response.status = 201;
+      response.body = {
+        success: true,
+        data: team,
+      }
+    }
+  } catch (error) {
+    response.body = {
+      success: false,
+      msg: error.toString(),
+    }
   }
+  // const res = await kv.get(["teams", "pinpals"]);
 } 
 
 const addTeam = async ({request, response}: { request: any; response: any; }) => {
