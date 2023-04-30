@@ -52,13 +52,15 @@ const addTeamTest = async ({request, response}: { request: any; response: any; }
       }
     } else {
       const body = await request.body();
+      console.log(body.value.players);
       const team = await body.value;
+      const players = await JSON.parse(body.value.players)
 
       await kv.set(["teams", body.value.name], { 
         name: body.value.name,
         maxPlayers: body.value.maxPlayers,
         color: body.value.color,
-        players: [...body.value.players]
+        players: [...players]
       });
 
       response.status = 201;
