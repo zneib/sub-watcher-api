@@ -52,8 +52,8 @@ const addTeamTest = async ({request, response}: { request: any; response: any; }
       }
     } else {
       const body = await request.body();
-      console.log(body.value);
-      const team = await body.value;
+      const team = await JSON.parse(body.value);
+      await console.log(team)
 
       await kv.set(["teams", body.value.name], { 
         name: body.value.name,
